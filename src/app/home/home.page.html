@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Stringee
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,36 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Stringee</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div id="container" class="ion-padding">
+
+    <ion-button expand="block" (click)="getPermisiion()" style="margin-top: 25px; height: 50px;">Get Permission</ion-button>
+
+    <ion-item style="margin-top: 25px;">
+      <ion-label position="stacked" >Enter UserID</ion-label>
+      <ion-input type="text" [(ngModel)]="userId"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="getToken()" style="margin-top: 25px; height: 50px;">Get Token</ion-button> 
+    
+   
+    <ion-button expand="block" (click)="getConfig()" style="margin-top: 25px; height: 50px;">Get Config</ion-button>
+
+    <ion-item style="margin-top: 25px;">
+      <ion-label position="stacked" >Enter CallerID</ion-label>
+      <ion-input type="text" [(ngModel)]="reciverid"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="outgoingCall()" style="margin-top: 25px; height: 50px;">Make Call</ion-button>
+    <ion-button expand="block" (click)="answerCall()" style="margin-top: 25px; height: 50px;">Answer Call</ion-button>
+    <ion-button expand="block" (click)="endCall()" style="margin-top: 25px; height: 50px;">End Call</ion-button>
+
+    
+
+    
+
   </div>
 </ion-content>

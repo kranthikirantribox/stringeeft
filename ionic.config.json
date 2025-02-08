@@ -1,5 +1,7 @@
 {
   "name": "stringeeft",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { radiantx } from 'stringeeplugin';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-home',
@@ -6,8 +9,66 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
   standalone: false,
 })
-export class HomePage {
+export class HomePage implements OnInit{
+  userId!: string;
+  reciverid!: string;
+  token!: string;
+  constructor(private http: HttpClient) {}
 
-  constructor() {}
+  
+  ngOnInit() {
+  }
 
+  async getToken(){
+    const apiUrl ='https://bmapi.ceesolutionbox.com/company/public/stringeeToken';
+      const requestBody = {
+        "userId":this.userId,
+    };
+      try {
+        const response = await this.http.post(apiUrl, requestBody).toPromise();
+       
+        let key_response = JSON.stringify(response);
+        let parsedResponse = JSON.parse(key_response);
+        console.log('API Response:', parsedResponse.token);
+        this.token = parsedResponse.token;
+      }catch (error) {
+        // Handle errors
+        console.error('Error:', error);
+      }
+
+  }
+
+
+  
+async getPermisiion(){
+      let result =  await radiantx.getpermission();
+      console.log("result", result);
+}
+
+    
+  async getConfig(){
+      let result =  await radiantx.getConfig({ value: this.token });
+      console.log("result", result);
+  }
+
+async outgoingCall(){
+  let data = {
+      CALLER_USER_ID : this.userId,
+      RECEIVER_USER_ID : this.reciverid,
+      }
+
+  let result =  await radiantx.outgoingCall({ value: JSON.stringify(data)});
+  console.log("result", result);
+       
+}
+async answerCall(){
+  let result =  await radiantx.answerCall();
+  console.log("result", result);
+
+}
+
+async endCall(){
+  let result =  await radiantx.endCall();
+  console.log("result", result);
+}
 }
