@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { radiantx } from 'stringeeplugin';
 import { HttpClient } from '@angular/common/http';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class HomePage implements OnInit{
   userId!: string;
   reciverid!: string;
   token!: string;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastController: ToastController) {}
 
   
   ngOnInit() {
@@ -30,7 +31,13 @@ export class HomePage implements OnInit{
         let key_response = JSON.stringify(response);
         let parsedResponse = JSON.parse(key_response);
         console.log('API Response:', parsedResponse.token);
+        
         this.token = parsedResponse.token;
+         const toast = await this.toastController.create({
+            message: 'API Response Token: ' + parsedResponse.token,
+            duration: 2000
+        });
+        toast.present();
       }catch (error) {
         // Handle errors
         console.error('Error:', error);
